@@ -2,6 +2,8 @@ function Footer() {
   return (
     <footer
       className="
+        mt-auto
+        w-full
         border-t
         border-gray-200
         bg-white
@@ -13,7 +15,7 @@ function Footer() {
         sm:py-8
       "
     >
-      <div className="mx-auto max-w-7xl text-center">
+      <div className="mx-auto w-full max-w-7xl text-center">
         <p
           className="
             text-sm
@@ -22,13 +24,8 @@ function Footer() {
             sm:text-base
           "
         >
-          Made  by
-          
-            Rajaa in 2026
-         
+          Made by Rajaa in 2026
         </p>
-
-        
       </div>
     </footer>
   );

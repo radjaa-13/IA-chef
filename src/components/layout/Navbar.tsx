@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { ChefHat,Moon,Sun,} from "lucide-react";
+import { ChefHat, Moon, Sun } from "lucide-react";
 
 function Navbar() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
+   
     return localStorage.getItem("theme") === "dark";
   });
 
@@ -40,7 +41,6 @@ function Navbar() {
           lg:px-8
         "
       >
-       
         <div className="flex min-w-0 items-center gap-3">
           <div
             className="
@@ -58,9 +58,9 @@ function Navbar() {
             "
           >
             <ChefHat
-              size={30}
+              size={28}
               strokeWidth={2}
-              className="text-orange-500 sm:h-9 sm:w-9"
+              className="text-orange-500 sm:h-8 sm:w-8"
               aria-hidden="true"
             />
           </div>
@@ -88,12 +88,11 @@ function Navbar() {
                 sm:block
               "
             >
-              Cook with AI
+              Cook with AI chef
             </p>
           </div>
         </div>
 
-        
         <button
           type="button"
           onClick={toggleDarkMode}
@@ -115,11 +114,8 @@ function Navbar() {
             border-gray-200
             bg-white
             text-gray-700
-            transition-all
-            duration-200
-            hover:scale-105
+            transition
             hover:bg-gray-50
-            active:scale-95
             focus:outline-none
             focus-visible:ring-2
             focus-visible:ring-orange-500
@@ -132,9 +128,15 @@ function Navbar() {
           "
         >
           {darkMode ? (
-            <Sun size={20} aria-hidden="true" />
+            <Sun
+              size={20}
+              aria-hidden="true"
+            />
           ) : (
-            <Moon size={20} aria-hidden="true" />
+            <Moon
+              size={20}
+              aria-hidden="true"
+            />
           )}
         </button>
       </nav>

@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
-
   font-family:
     Inter,
     system-ui,
@@ -20,10 +16,9 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
-  overflow-x: hidden;
 }
 
 #root {
   min-height: 100vh;
+  width: 100%;
 }
