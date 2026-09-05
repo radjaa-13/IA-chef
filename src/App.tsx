@@ -3,18 +3,17 @@ import Footer from "./components/layout/Footer";
 import Hero from "./components/recipe/Hero";
 import RecipeForm from "./components/recipe/RecipeForm";
 import RecipeCard from "./components/recipe/RecipeCard";
-import type { Recipe } from "./types/recipe";
+import { useRecipe } from "./hooks/useRecipe";
 
 function App() {
+  const {
+    recipe,
+    loading,
+    error,
+    generate,
+  } = useRecipe();
   
-  const recipe: Recipe | null = null;
-
-  
-  const loading = false;
-
-  function handleGenerate(prompt: string): void {
-    console.log("Recipe prompt:", prompt);
-  }
+   // App layout
 
   return (
     <div
@@ -23,7 +22,6 @@ function App() {
         min-h-screen
         w-full
         flex-col
-        overflow-x-hidden
         bg-white
         text-gray-900
         transition-colors
@@ -38,11 +36,17 @@ function App() {
         <Hero />
 
         <RecipeForm
-          onGenerate={handleGenerate}
+          onGenerate={generate}
           loading={loading}
         />
 
-        {recipe && <RecipeCard recipe={recipe} />}
+        {recipe &&
+          !loading &&
+          !error && (
+            <RecipeCard
+              recipe={recipe}
+            />
+          )}
       </main>
 
       <Footer />

@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { Sparkles } from "lucide-react";
+import { useState, type SyntheticEvent } from "react";
+import { validateRecipePrompt } from "../../utils/validation";
 
 interface RecipeFormProps {
   onGenerate: (prompt: string) => void;
@@ -11,19 +11,36 @@ function RecipeForm({
   loading,
 }: RecipeFormProps) {
   const [prompt, setPrompt] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   function handleSubmit(
-    event: FormEvent<HTMLFormElement>,
+    event: SyntheticEvent<HTMLFormElement>,
   ): void {
     event.preventDefault();
+// Check form
+    const validationError =
+      validateRecipePrompt(prompt);
 
-    const cleanPrompt = prompt.trim();
-
-    if (!cleanPrompt || loading) {
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
-    onGenerate(cleanPrompt);
+    setError(null);
+
+    
+    onGenerate(prompt.trim());
+  }
+
+  function handlePromptChange(
+    value: string,
+  ): void {
+    setPrompt(value);
+
+    
+    if (error) {
+      setError(null);
+    }
   }
 
   return (
@@ -70,12 +87,16 @@ function RecipeForm({
         <textarea
           id="recipe-prompt"
           value={prompt}
-          onChange={(event) => {
-            setPrompt(event.target.value);
-          }}
+          onChange={(event) =>
+            handlePromptChange(event.target.value)
+          }
           disabled={loading}
           rows={4}
           maxLength={500}
+          aria-invalid={Boolean(error)}
+          aria-describedby={
+            error ? "recipe-prompt-error" : undefined
+          }
           placeholder="Example: A healthy chicken pasta..."
           className="
             w-full
@@ -101,6 +122,16 @@ function RecipeForm({
             dark:placeholder:text-gray-500
           "
         />
+
+        {error && (
+          <p
+            id="recipe-prompt-error"
+            role="alert"
+            className="mt-2 text-left text-sm text-red-500"
+          >
+            {error}
+          </p>
+        )}
 
         <button
           type="submit"
@@ -131,7 +162,9 @@ function RecipeForm({
         >
           
 
-          {loading ? "Generating..." : "Generate recipe"}
+          {loading
+            ? "Generating..."
+            : "Generate recipe"}
         </button>
       </form>
     </section>

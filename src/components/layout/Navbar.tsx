@@ -18,6 +18,8 @@ function Navbar() {
       darkMode ? "dark" : "light",
     );
   }, [darkMode]);
+  
+  // Toggle theme
 
   function toggleDarkMode(): void {
     setDarkMode((currentMode) => !currentMode);

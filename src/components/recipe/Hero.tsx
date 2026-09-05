@@ -1,5 +1,5 @@
 import { Utensils } from "lucide-react";
-
+// Hero section
 function Hero() {
   return (
     <section

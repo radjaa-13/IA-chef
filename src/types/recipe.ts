@@ -7,11 +7,14 @@ export interface Recipe {
   steps: string[];
   imageUrl?: string;
 }
-/* Recipe generation request*/
+
+// Recipe generation request
+
 export interface GenerateRecipeRequest {
   prompt: string;
 }
-/* Recipe generation response */
+
+// Recipe generation response
 export interface GenerateRecipeResponse {
   recipe: Recipe;
 }

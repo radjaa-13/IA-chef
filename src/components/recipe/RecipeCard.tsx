@@ -4,6 +4,7 @@ interface RecipeCardProps {
   recipe: Recipe;
 }
 
+// Recipe card
 function RecipeCard({ recipe }: RecipeCardProps) {
   return (
     <section
